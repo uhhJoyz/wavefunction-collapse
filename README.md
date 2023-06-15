@@ -9,3 +9,5 @@ So far, the generator allows the user to specify two colors, then it will then g
 One example of such a generation is the following:
 
 ![Example Image](img.png)
+
+The original wavefunction collapse can be found [here](https://github.com/mxgmn/WaveFunctionCollapse). It is much more sophisticated than this implementation because this is an early alpha version of this library. The libraries are intended to differ fundamentally at a later date.
