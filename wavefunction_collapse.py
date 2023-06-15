@@ -83,4 +83,4 @@ def wavefunction_collapse(tiles=None, tileset=None, x_dim=None, y_dim=None, dark
 
 if __name__ == "__main__":
     # tiles = [[0 if 0.25 * X_DIM < x < 0.75 * X_DIM and 0.25 * Y_DIM < y < 0.75 * Y_DIM else None for x in range(X_DIM)] for y in range(Y_DIM)]
-    wavefunction_collapse()
+    wavefunction_collapse(dark = (0,10,10), light=(15, 255, 125))
