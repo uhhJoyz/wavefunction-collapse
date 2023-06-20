@@ -1,6 +1,8 @@
 from lib.compare_tiles import *
 from lib.generate_tiles import *
 from lib.image_generation import *
+from lib.read_tileset import *
+
 
 TILESET = [
         [
@@ -10,7 +12,7 @@ TILESET = [
         ],
         [
             [0, 1, 0],
-            [0, 1, 1],
+            [0, 1, 2],
             [0, 0, 0]
         ],
         [
@@ -20,7 +22,7 @@ TILESET = [
         ],
         [
             [0, 0, 0],
-            [1, 1, 0],
+            [2, 1, 0],
             [0, 1, 0]
         ],
         [
@@ -31,7 +33,7 @@ TILESET = [
         [
             [0, 1, 0],
             [0, 1, 0],
-            [0, 1, 0]
+            [0, 2, 0]
         ],
         [
             [0, 0, 0],
@@ -39,17 +41,17 @@ TILESET = [
             [0, 0, 0]
         ],
         [
-            [0, 1, 0],
+            [0, 2, 0],
             [1, 1, 1],
             [0, 1, 0]
         ]
     ]
 
-X_DIM = 256
-Y_DIM = 256
+X_DIM = 128
+Y_DIM = 128
 
 
-def wavefunction_collapse(tiles=None, tileset=None, x_dim=None, y_dim=None, dark=None, light=None):
+def wavefunction_collapse(tiles=None, tileset=None, x_dim=None, y_dim=None, dark=None, light=None, color_scheme=None):
     """
     A two color wavefunction collapse image generation algorithm.
     :param tiles: a list of user-defined tiles
@@ -62,7 +64,7 @@ def wavefunction_collapse(tiles=None, tileset=None, x_dim=None, y_dim=None, dark
     """
 
     if tileset is None:
-        tileset = TILESET
+        tileset, color_scheme = read_tileset(numtiles=8)
 
     if x_dim is None:
         x_dim = X_DIM
@@ -75,12 +77,12 @@ def wavefunction_collapse(tiles=None, tileset=None, x_dim=None, y_dim=None, dark
         tiles = [[None for x in range(x_dim)] for y in range(y_dim)]
 
     generate_tiles(comp, tiles)
-    if dark and light:
-        generate_image(tileset, tiles, dark, light)
+    if color_scheme:
+        generate_image(tileset, tiles, color_scheme)
     else:
-        generate_image(tileset, tiles)
+        generate_image(tileset, tiles, [(0,10,10), (255, 255, 255), (255, 0, 0)])
 
 
 if __name__ == "__main__":
     # tiles = [[0 if 0.25 * X_DIM < x < 0.75 * X_DIM and 0.25 * Y_DIM < y < 0.75 * Y_DIM else None for x in range(X_DIM)] for y in range(Y_DIM)]
-    wavefunction_collapse(dark = (0,10,10), light=(15, 255, 125))
+    wavefunction_collapse()

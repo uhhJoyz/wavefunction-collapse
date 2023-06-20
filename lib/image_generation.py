@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 
 
-def generate_image(tileset, tiles, dark=(0, 0, 0), light=(255, 35, 255)):
+def generate_image(tileset, tiles, color_scheme):
     img = []
     for row in tiles:
         for i in range(len(tileset[0])):
@@ -14,10 +14,7 @@ def generate_image(tileset, tiles, dark=(0, 0, 0), light=(255, 35, 255)):
 
     for (i, row) in enumerate(img):
         for (j, p) in enumerate(row):
-            if p == 1:
-                img[i][j] = light
-            else:
-                img[i][j] = dark
+            img[i][j] = color_scheme[p]
 
     img = np.asarray(img, dtype=np.uint8)
     img = Image.fromarray(img)
